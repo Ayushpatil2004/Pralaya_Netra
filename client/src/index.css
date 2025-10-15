@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@import "tailwindcss";
+
+*{
+  font-family: "Outfit", sans-serif;
+}
+
+body{
+  background-image: url('./assets/disaster2_bg.jpg');
+
+  background-size: cover;
+  background-attachment: fixed; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #1a1a2e; 
+    
+  min-height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+.main-content-container {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1; 
+}
+
+.main-content-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: -1; 
+}
