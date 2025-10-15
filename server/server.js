@@ -25,8 +25,6 @@ app.use(cookieParser());
 app.use(cors({origin: allowedOrigins, credentials: true}));
 
 // API Endpoints
-app.get('/', (req, res) => res.send('Server is running'));  
-  
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 
