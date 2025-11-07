@@ -24,8 +24,6 @@ const Login = () => {
       
       axios.defaults.withCredentials = true;
 
-      const POWER_BI_LINK = "https://app.powerbi.com/reportEmbed?reportId=a4e8a805-1b6a-4292-9ab9-d740a19a73cb&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b"
-
       // Determine the API endpoint based on state
     const endpoint = state === "Sign Up" ? '/api/auth/register' : '/api/auth/login';
     const payload = state === "Sign Up" ? {name, email, password} : {email, password};
@@ -34,7 +32,7 @@ const Login = () => {
     
     if(data.success){
           setIsLoggedin(true)
-          getUserData()
+          await getUserData()
 
           // 1. Logic for Verified Users (Redirect to Power BI)
           if(data.isAccountVerified){
