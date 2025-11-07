@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'  
 import { useContext } from 'react'
 import { useEffect } from 'react'
+import { useState } from 'react' 
 import { assets } from '../assets/assets'
 
 function EmailVerify() {
@@ -13,6 +14,11 @@ function EmailVerify() {
   const {backendUrl, isLoggedin, userData, getUserData} = useContext(AppContext)
   const navigate = useNavigate()
   const inputRefs = React.useRef([])
+  
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
+  
+  const POWER_BI_LINK = "https://app.powerbi.com/reportEmbed?reportId=ecfe448a-f4a8-43e0-88d6-a804091bdfca&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b"
+
 
   const handleInput = (e, index) => {
     if(e.target.value.length > 0 && index < inputRefs.current.length -1){
@@ -39,6 +45,14 @@ function EmailVerify() {
   const onSubmitHandler = async (e) => {
     try{
       e.preventDefault();
+      
+      // 🆕 NEW GUARD: Prevent form submission if not logged in
+      if (!isLoggedin) {
+        toast.error("Please log in to verify your account.");
+        navigate('/login');
+        return;
+      }
+
       const otpArray = inputRefs.current.map(e => e.value);
       const otp = otpArray.join('')
 
@@ -46,18 +60,43 @@ function EmailVerify() {
       if(data.success){
         toast.success(data.message)
         getUserData()
-        navigate('/')
+        
+        setVerificationSuccess(true); 
+        
+        // Direct Redirection 1: Successful verification attempt 
+        setTimeout(() => {
+            window.location.href = POWER_BI_LINK; 
+        }, 700);
+        
       }else{
         toast.error(data.message)
       }
     } catch (error){
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || "An unexpected error occurred.") 
     }
   }
 
+  // Effect to handle access control and already-verified users
   useEffect(() => {
-   isLoggedin && userData && userData.isAccountVerified && navigate('/')
-  },[isLoggedin, userData])
+    // 🛑 CRITICAL CHECK 1: If user is NOT logged in, redirect to login page
+    if (!isLoggedin) {
+        toast.warn("Access denied. Please log in.");
+        navigate('/login');
+        return;
+    }
+    
+    // CRITICAL CHECK 2: If user IS logged in AND verified, redirect to Power BI
+    if (!verificationSuccess && isLoggedin && userData && userData.isAccountVerified) {
+       toast.success("Account already verified! Redirecting to Power BI...");
+       // Direct Redirection 2: Already verified user visiting this page
+       setTimeout(() => {
+           window.location.href = POWER_BI_LINK; 
+       }, 700);
+    }
+    
+    // NOTE: If logged in but unverified, the component renders the form normally.
+    
+  },[isLoggedin, userData, navigate, verificationSuccess]) 
 
   return (
     <div className="flex items-center justify-center min-h-screen">

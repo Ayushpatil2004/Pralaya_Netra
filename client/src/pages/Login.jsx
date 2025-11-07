@@ -35,10 +35,31 @@ const Login = () => {
     if(data.success){
           setIsLoggedin(true)
           getUserData()
-          toast.success("Login successful! Redirecting to Power BI...");
-          setTimeout(() => {
-        window.location.href = POWER_BI_LINK;
-      }, 500);
+
+          // 1. Logic for Verified Users (Redirect to Power BI)
+          if(data.isAccountVerified){
+             // Use specific success message based on state (Login or Sign Up)
+             const successMsg = state === "Sign Up" 
+                ? "Registration successful! Redirecting to Power BI..."
+                : "Login successful! Redirecting to Power BI...";
+                
+             toast.success(successMsg);
+             setTimeout(() => {
+                window.location.href = POWER_BI_LINK;
+             }, 700);
+          } 
+          
+          // 2. Logic for Unverified Users (Redirect to Home for verification prompt)
+          else {
+             // Use specific warning/success message based on state.
+             const unverifiedMsg = state === "Sign Up" 
+               ? "Registration successful! Please verify your email to access Power BI."
+               : "Login successful! Please verify your email to access Power BI.";
+               
+             // Use toast.warn for verification prompt
+             toast.warn(unverifiedMsg); 
+             navigate('/'); // Redirect to Home Page
+          }
         }else{
           toast.error(data.message)
         }

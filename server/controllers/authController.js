@@ -18,6 +18,7 @@ export const register = async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // User is created unverified.
         const user = new userModel({name, email, password: hashedPassword});
         await user.save();
 
@@ -28,19 +29,24 @@ export const register = async (req, res) => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+        });
       
-      //sending welcome email
-      const mailOPtions = {
-        from : process.env.SENDER_EMAIL,
-        to : email,
-        subject : 'Welcome to our website',
-        text : `Hi ${name},\n\nThank you for registering on our website.\n\nBest regards,\nThe Team \n\n Your account has been created with email id: ${email}`
-      }  
+        // Sending a basic welcome email (keeping original welcome email logic)
+        const mailOPtions = {
+            from : process.env.SENDER_EMAIL,
+            to : email,
+            subject : 'Welcome to our website',
+            text : `Hi ${name},\n\nThank you for registering on our website.\n\nBest regards,\nThe Team \n\n Your account has been created with email id: ${email}`
+        }  
 
-      await transporter.sendMail(mailOPtions);
+        await transporter.sendMail(mailOPtions);
 
-      return res.json({success: true});
+        // MODIFIED: Return the verification status (false) along with success
+        return res.json({
+            success: true, 
+            message: 'Registration successful!',
+            isAccountVerified: user.isAccountVerified // Will be false
+        }); 
     } catch (error) {
         res.json({success: false, message: error.message});
     }
@@ -71,9 +77,14 @@ export const login = async (req, res) => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+        });
 
-    return res.json({success: true, message: 'Logged in!'});
+        // Pass verification status on login
+        return res.json({
+            success: true, 
+            message: 'Logged in!',
+            isAccountVerified: user.isAccountVerified
+        });
 
     } catch (error) {
         res.json({success: false, message: error.message});
@@ -95,7 +106,7 @@ export const logout = async (req, res) => {
     }
 }
 
-//Send OTP to verify email
+//Send OTP to verify email (Used when user clicks 'Verify' button)
 export const sendVerifyOtp = async (req,res) => {
     try{
     const {userId} = req.user;
@@ -236,7 +247,6 @@ export const verifyResetOTP = async (req, res) => {
         }
 
         // 3. Check if the OTP has expired (e.g., 10 minutes)
-        // Ensure you are storing resetPasswordExpires as a Date/Timestamp
         if (user.resetOtpExpireAt < Date.now()) {
             // Clear the expired OTP fields
             user.resetPasswordOtp = undefined;
