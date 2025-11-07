@@ -14,7 +14,10 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 connectDB();
 
-const allowedOrigins = ['https://pralaya-netra-2025.onrender.com'];
+const allowedOrigins = [
+  'https://pralaya-netra-2025.onrender.com',
+  'http://localhost:5173'
+];
 
 const _dirname = path.resolve();
 
