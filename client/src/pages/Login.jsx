@@ -10,7 +10,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   
-  const {backendUrl, setIsLoggedin, getUserData} = useContext(AppContext)
+  const {setIsLoggedin, getUserData} = useContext(AppContext)
   
   const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
@@ -29,7 +29,7 @@ const Login = () => {
       // Determine the API endpoint based on state
     const endpoint = state === "Sign Up" ? '/api/auth/register' : '/api/auth/login';
     const payload = state === "Sign Up" ? {name, email, password} : {email, password};
-    const {data} = await axios.post(backendUrl + endpoint, payload);
+    const {data} = await axios.post(endpoint, payload);
 
     
     if(data.success){

@@ -11,7 +11,7 @@ import { assets } from '../assets/assets'
 function EmailVerify() {
   
   axios.defaults.withCredentials = true;
-  const {backendUrl, isLoggedin, userData, getUserData} = useContext(AppContext)
+  const {isLoggedin, userData, getUserData} = useContext(AppContext)
   const navigate = useNavigate()
   const inputRefs = React.useRef([])
   
@@ -56,7 +56,7 @@ function EmailVerify() {
       const otpArray = inputRefs.current.map(e => e.value);
       const otp = otpArray.join('')
 
-      const {data} = await axios.post(backendUrl + '/api/auth/verify-account', {otp})
+      const {data} = await axios.post('/api/auth/verify-account', {otp})
       if(data.success){
         toast.success(data.message)
         getUserData()
