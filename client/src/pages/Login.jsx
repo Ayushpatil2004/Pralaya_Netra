@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import api from "../api";
 
 const Login = () => {
 
@@ -30,7 +29,7 @@ const Login = () => {
       // Determine the API endpoint based on state
     const endpoint = state === "Sign Up" ? '/api/auth/register' : '/api/auth/login';
     const payload = state === "Sign Up" ? {name, email, password} : {email, password};
-    const {data} = await api.post(endpoint, payload);
+    const {data} = await axios.post(backendUrl + endpoint, payload);
 
     
     if(data.success){

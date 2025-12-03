@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import api from '../api'
 
 const Navbar = () => {
   
@@ -13,8 +12,9 @@ const Navbar = () => {
 
   const sendVerificationOtp = async () => {
     try{
-      const {data} = await api.post('/api/auth/send-verify-otp')
-
+      axios.defaults.withCredentials = true;
+      const {data} = await axios.post(backendUrl + '/api/auth/send-verify-otp')
+      
       if(data.success){
         navigate('/email-verify')
         toast.success(data.message)
@@ -22,20 +22,19 @@ const Navbar = () => {
         toast.error(data.message)
       }
     } catch (error){
-      toast.error(error.response?.data?.message || error.message)
+      toast.error(error.message)  
     }
   }
 
-   const logout = async () =>{
+  const logout = async () =>{
     try{
-      const {data} = await api.post('/api/auth/logout')
-      if(data.success){
-        setIsLoggedin(false)
-        setUserData(false)
-        navigate('/')
-      }
+      axios.defaults.withCredentials = true;
+      const {data} = await axios.post(backendUrl + '/api/auth/logout')
+      data.success && setIsLoggedin(false)
+      data.success && setUserData(false)
+      navigate('/')
     } catch (error){
-      toast.error(error.response?.data?.message || error.message)
+      toast.error(error.message)
     }
   }
     
