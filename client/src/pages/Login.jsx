@@ -24,7 +24,7 @@ const Login = () => {
       
       axios.defaults.withCredentials = true;
 
-      const POWER_BI_LINK = "https://app.powerbi.com/reportEmbed?reportId=ecfe448a-f4a8-43e0-88d6-a804091bdfca&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b"
+      const POWER_BI_LINK = "https://app.powerbi.com/reportEmbed?reportId=a4e8a805-1b6a-4292-9ab9-d740a19a73cb&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b";
 
       // Determine the API endpoint based on state
     const endpoint = state === "Sign Up" ? '/api/auth/register' : '/api/auth/login';
