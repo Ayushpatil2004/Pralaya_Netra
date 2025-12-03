@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react' 
 import { assets } from '../assets/assets'
+import api from '../api'
 
 function EmailVerify() {
   
@@ -56,7 +57,7 @@ function EmailVerify() {
       const otpArray = inputRefs.current.map(e => e.value);
       const otp = otpArray.join('')
 
-      const {data} = await axios.post(backendUrl + '/api/auth/verify-account', {otp})
+      const {data} = await api.post('/api/auth/verify-account', {otp})
       if(data.success){
         toast.success(data.message)
         getUserData()

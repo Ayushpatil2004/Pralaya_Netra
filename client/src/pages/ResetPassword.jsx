@@ -6,6 +6,7 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { useContext } from 'react'
 import { toast } from 'react-toastify'
+import api from '../api'
 
 
 const ResetPassword = () => {
@@ -47,7 +48,7 @@ const ResetPassword = () => {
   const onSubmitEmail = async (e) => {
     e.preventDefault();
     try{
-      const {data} = await axios.post(backendUrl + '/api/auth/send-reset-otp', {email})
+      const {data} = await api.post('/api/auth/send-reset-otp', {email})
       data.success ? toast.success(data.message) : toast.error(data.message)
       data.success && setIsEmailSent(true)
     } catch (error){
@@ -71,7 +72,7 @@ const ResetPassword = () => {
     
     try {
 
-        const { data } = await axios.post(backendUrl + '/api/auth/verify-reset-otp', { email, otp: submittedCode });
+        const {data} = await api.post('/api/auth/verify-reset-otp', { email, otp: submittedCode })
         
         if (data.success) {
             toast.success("OTP verified. Please enter your new password.");
@@ -87,7 +88,7 @@ const ResetPassword = () => {
   const onSubmitNewPassword = async (e) => {
    e.preventDefault();
     try{
-      const {data} = await axios.post(backendUrl + '/api/auth/reset-password', {email, otp, newPassword}) 
+      const {data} = await api.post('/api/auth/reset-password', {email, otp, newPassword})
       data.success ? toast.success(data.message) : toast.error(data.message)
       data.success && navigate('/login')
     } catch (error){
