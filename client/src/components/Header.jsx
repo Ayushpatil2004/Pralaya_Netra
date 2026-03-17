@@ -23,7 +23,13 @@ const Header = () => {
         Welcome to Pralaya Netra
       </h2>
       <p className="mb-8 max-w-md text-white">Let's quickly see the analysis</p>
-      <button onClick={()=>navigate('/login')} className="border border-gray-500 text-white rounded-full px-8 py-2.5 hover:bg-gray-700 transition-all hover:cursor-pointer">
+      <button onClick={()=>{
+        if (userData && userData.isAccountVerified) {
+          window.location.href = "https://app.powerbi.com/reportEmbed?reportId=a4e8a805-1b6a-4292-9ab9-d740a19a73cb&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b";
+        } else {
+          navigate('/login')
+        }
+      }} className="border border-gray-500 text-white rounded-full px-8 py-2.5 hover:bg-gray-700 transition-all hover:cursor-pointer">
         Get Started
       </button>
     </div>

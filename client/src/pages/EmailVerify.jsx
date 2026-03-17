@@ -33,6 +33,7 @@ function EmailVerify() {
   }
 
   const handlePaste = (e) => {
+    e.preventDefault();
     const paste = e.clipboardData.getData('text')
     const pasteArray = paste.split('');
     pasteArray.forEach((char, index) => {
@@ -40,13 +41,18 @@ function EmailVerify() {
         inputRefs.current[index].value = char;
       }
     })
+    // Focus on the next empty input or the last one
+    const nextIndex = Math.min(pasteArray.length, 5);
+    if(inputRefs.current[nextIndex]){
+      inputRefs.current[nextIndex].focus();
+    }
   }
 
   const onSubmitHandler = async (e) => {
     try{
       e.preventDefault();
       
-      // 🆕 NEW GUARD: Prevent form submission if not logged in
+      // Prevent form submission if not logged in
       if (!isLoggedin) {
         toast.error("Please log in to verify your account.");
         navigate('/login');
@@ -78,14 +84,14 @@ function EmailVerify() {
 
   // Effect to handle access control and already-verified users
   useEffect(() => {
-    // 🛑 CRITICAL CHECK 1: If user is NOT logged in, redirect to login page
+    // If user is NOT logged in, redirect to login page
     if (!isLoggedin) {
         toast.warn("Access denied. Please log in.");
         navigate('/login');
         return;
     }
     
-    // CRITICAL CHECK 2: If user IS logged in AND verified, redirect to Power BI
+    // If user IS logged in AND verified, redirect to Power BI
     if (!verificationSuccess && isLoggedin && userData && userData.isAccountVerified) {
        toast.success("Account already verified! Redirecting to Power BI...");
        // Direct Redirection 2: Already verified user visiting this page
@@ -93,9 +99,7 @@ function EmailVerify() {
            window.location.href = POWER_BI_LINK; 
        }, 700);
     }
-    
-    // NOTE: If logged in but unverified, the component renders the form normally.
-    
+        
   },[isLoggedin, userData, navigate, verificationSuccess]) 
 
   return (
@@ -115,12 +119,28 @@ function EmailVerify() {
             <input type="text" maxLength='1' key={index} required
             className='w-12 h-12 bg-[#333A5C] text-white text-center text-xl rounded-md'
             ref={e => inputRefs.current[index] = e}
+            autoComplete="one-time-code"
             onInput={(e) => handleInput(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
+            onChange={(e) => {
+              // If a user (or auto-fill) enters multiple characters in one field
+              if (e.target.value.length > 1) {
+                const pasteArray = e.target.value.split('');
+                pasteArray.forEach((char, i) => {
+                  if (inputRefs.current[i]) {
+                    inputRefs.current[i].value = char;
+                  }
+                });
+                const nextIndex = Math.min(pasteArray.length, 5);
+                if (inputRefs.current[nextIndex]) {
+                  inputRefs.current[nextIndex].focus();
+                }
+              }
+            }}
             />
           ))}
          </div>
-         <button className='w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full'>Verify Email</button>
+         <button className='w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full hover:cursor-pointer'>Verify Email</button>
       </form>
     </div>
   )

@@ -35,6 +35,7 @@ const ResetPassword = () => {
     }
   
     const handlePaste = (e) => {
+      e.preventDefault();
       const paste = e.clipboardData.getData('text')
       const pasteArray = paste.split('');
       pasteArray.forEach((char, index) => {
@@ -42,6 +43,11 @@ const ResetPassword = () => {
           inputRefs.current[index].value = char;
         }
       })
+      // Focus on the next empty input or the last one
+      const nextIndex = Math.min(pasteArray.length, 5);
+      if(inputRefs.current[nextIndex]){
+        inputRefs.current[nextIndex].focus();
+      }
     }
 
   const onSubmitEmail = async (e) => {
@@ -116,7 +122,7 @@ const ResetPassword = () => {
           <input type="email" placeholder='Email id' className='bg-transparent outline-none text-white'
           value={email} onChange={e => setEmail(e.target.value)} required/>
         </div>
-        <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3'>Submit</button>
+        <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3 hover:cursor-pointer'>Submit</button>
       </form>
 }
       {/* otp input form */}
@@ -131,12 +137,28 @@ const ResetPassword = () => {
             <input type="text" maxLength='1' key={index} required
             className='w-12 h-12 bg-[#333A5C] text-white text-center text-xl rounded-md'
             ref={e => inputRefs.current[index] = e}
+            autoComplete="one-time-code"
             onInput={(e) => handleInput(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
+            onChange={(e) => {
+              // If a user (or auto-fill) enters multiple characters in one field
+              if (e.target.value.length > 1) {
+                const pasteArray = e.target.value.split('');
+                pasteArray.forEach((char, i) => {
+                  if (inputRefs.current[i]) {
+                    inputRefs.current[i].value = char;
+                  }
+                });
+                const nextIndex = Math.min(pasteArray.length, 5);
+                if (inputRefs.current[nextIndex]) {
+                  inputRefs.current[nextIndex].focus();
+                }
+              }
+            }}
             />
           ))}
          </div>
-         <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full'>Submit</button>
+         <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full hover:cursor-pointer'>Submit</button>
       </form>
 }
       {/* Enter new password */}
@@ -150,7 +172,7 @@ const ResetPassword = () => {
           <input type="password" placeholder='Password' className='bg-transparent outline-none text-white'
           value={newPassword} onChange={e => setNewPassword(e.target.value)} required/>
         </div>
-        <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3'>Submit</button>
+        <button className='w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3 hover:cursor-pointer'>Submit</button>
       </form>
 }
     </div>

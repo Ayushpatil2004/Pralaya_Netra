@@ -42,16 +42,15 @@ const Navbar = () => {
     <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0'>
       <img src={assets.pralaya_netra} alt="" className='w-28 sm:w-32' style={{height: '66px', width: '105px', marginLeft: '-85px', marginTop: '-23px'}}/>
       {userData ? 
-      <div className='w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group'>
+      <div className='w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group hover:cursor-pointer'>
         {userData.name[0].toUpperCase()}
-        <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10'>
-          <ul className='list-none m-0 p-2 bg-gray-100 text-sm'>
+        <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black pt-10'>
+          <ul className='list-none m-0 p-0 bg-white shadow-lg rounded-md border border-gray-200 text-sm overflow-hidden min-w-[120px]'>
             {!userData.isAccountVerified &&
-            <li onClick={sendVerificationOtp} className='py-1 px-2 hover:bg-gray-200 cursor-pointer'>Verify Email</li>
+            <li onClick={sendVerificationOtp} className='py-2 px-4 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer border-b border-gray-100'>Verify Email</li>
             }
-            <li onClick={logout} className='py-1 px-2 hover:bg-gray-200 cursor-pointer pr-10'>Logout</li>
+            <li onClick={logout} className='py-2 px-4 hover:bg-red-50 hover:text-red-600 transition-colors cursor-pointer'>Logout</li>
           </ul>
-
         </div>
       </div>
     : <button onClick={()=>navigate('/login')}
