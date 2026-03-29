@@ -5,11 +5,27 @@ export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
 
-    axios.defaults.withCredentials = true;
+    // Remove withCredentials since we are using headers now
+    // axios.defaults.withCredentials = true;
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const[isLoggedin, setIsLoggedin] = useState(false);
     const[userData, setUserData] = useState(false);
+
+    // Setup axios interceptor to always attach token if it exists
+    useEffect(() => {
+        const interceptor = axios.interceptors.request.use((config) => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                config.headers.token = token;
+            }
+            return config;
+        });
+
+        return () => {
+            axios.interceptors.request.eject(interceptor);
+        };
+    }, []);
 
     const getAuthState = async () => {
         try{

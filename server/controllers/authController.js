@@ -24,12 +24,7 @@ export const register = async (req, res) => {
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'});
 
-        res.cookie('token',token,{
-            httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
+        // We will send token in the JSON response instead of setting a cookie
       
         // Sending a basic welcome email (keeping original welcome email logic)
         const mailOPtions = {
@@ -45,7 +40,8 @@ export const register = async (req, res) => {
         return res.json({
             success: true, 
             message: 'Registration successful!',
-            isAccountVerified: user.isAccountVerified // Will be false
+            isAccountVerified: user.isAccountVerified,
+            token // Sending token to the client
         }); 
     } catch (error) {
         res.json({success: false, message: error.message});
@@ -72,18 +68,14 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'});
 
-        res.cookie('token',token,{
-            httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
+        // We will send token in the JSON response instead of setting a cookie
 
         // Pass verification status on login
         return res.json({
             success: true, 
             message: 'Logged in!',
-            isAccountVerified: user.isAccountVerified
+            isAccountVerified: user.isAccountVerified,
+            token // Sending token to the client
         });
 
     } catch (error) {
@@ -93,11 +85,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try{
-        res.clearCookie('token',{
-            httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',        
-    })
+        // Simply return success as frontend will clear localStorage
 
     return res.json({success: true, message: "Logged out!"})
 

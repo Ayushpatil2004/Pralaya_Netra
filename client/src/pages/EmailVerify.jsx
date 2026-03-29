@@ -10,7 +10,7 @@ import { assets } from '../assets/assets'
 
 function EmailVerify() {
   
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
   const {backendUrl, isLoggedin, userData, getUserData} = useContext(AppContext)
   const navigate = useNavigate()
   const inputRefs = React.useRef([])

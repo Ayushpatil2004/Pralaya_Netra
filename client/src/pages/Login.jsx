@@ -22,7 +22,7 @@ const Login = () => {
     try{
       e.preventDefault();
       
-      axios.defaults.withCredentials = true;
+      // axios.defaults.withCredentials = true;
 
       const POWER_BI_LINK = "https://app.powerbi.com/reportEmbed?reportId=a4e8a805-1b6a-4292-9ab9-d740a19a73cb&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b";
 
@@ -33,6 +33,10 @@ const Login = () => {
 
     
     if(data.success){
+          // Store the JWT token to LocalStorage
+          if(data.token) {
+            localStorage.setItem('token', data.token);
+          }
           setIsLoggedin(true)
           getUserData()
 
