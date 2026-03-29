@@ -17,7 +17,7 @@ export const AppContextProvider = (props) => {
         const interceptor = axios.interceptors.request.use((config) => {
             const token = localStorage.getItem('token');
             if (token) {
-                config.headers.token = token;
+                config.headers.Authorization = `Bearer ${token}`; // Use standard Authorization header
             }
             return config;
         });
@@ -44,7 +44,7 @@ export const AppContextProvider = (props) => {
             const {data} = await axios.get(backendUrl + '/api/user/data') 
             data.success ? setUserData(data.userData) : toast.error(data.message)
         } catch (error){
-            toast.error(data.message)
+            toast.error(error.message)
         }
     }
 
