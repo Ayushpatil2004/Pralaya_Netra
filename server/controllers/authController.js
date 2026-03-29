@@ -33,9 +33,11 @@ export const register = async (req, res) => {
             subject : 'Welcome to our website',
             text : `Hi ${name},\n\nThank you for registering on our website.\n\nBest regards,\nThe Team \n\n Your account has been created with email id: ${email}`
         }  
-
-        await transporter.sendMail(mailOPtions);
-
+        try {
+            await transporter.sendMail(mailOPtions);
+        } catch (emailError) {
+            console.error("Welcome email failed to send: ", emailError.message);
+        }
         // MODIFIED: Return the verification status (false) along with success
         return res.json({
             success: true, 
@@ -118,9 +120,13 @@ export const sendVerifyOtp = async (req,res) => {
         text : `Your OTP is ${otp}. Verify your account using this OTP.`,
         html : EMAIL_VERIFY_TEMPLATE.replace('{{otp}}', otp).replace('{{email}}', user.email) 
     }
-    await transporter.sendMail(mailOptions);
-
-    res.json({success: true, message: 'OTP sent to your email'});
+    try {
+        await transporter.sendMail(mailOptions);
+        res.json({success: true, message: 'OTP sent to your email'});
+    } catch (emailError) {
+        console.error("Verification email failed:", emailError.message);
+        return res.json({success: false, message: "Email Failed: " + emailError.message});
+    }
 
     } catch (error){
         res.json({success: false, message: error.message});
@@ -203,9 +209,13 @@ export const sendResetOtp = async (req,res) => {
             html : PASSWORD_RESET_TEMPLATE.replace('{{otp}}', otp).replace('{{email}}', user.email)
         }
 
-        await transporter.sendMail(mailOptions);
-
-        res.json({success: true, message: 'OTP sent to your email'});
+        try {
+            await transporter.sendMail(mailOptions);
+            res.json({success: true, message: 'OTP sent to your email'});
+        } catch (emailError) {
+            console.error("Reset password email failed:", emailError.message);
+            return res.json({success: false, message: "Email Failed: " + emailError.message});
+        }
 
     }catch(error){
         res.json({success: false, message: error.message});
