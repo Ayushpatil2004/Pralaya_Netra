@@ -42,8 +42,8 @@ const Navbar = () => {
   }
     
   return (
-    <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0'>
-      <img src={assets.pralaya_netra} alt="" className='w-28 sm:w-32' style={{height: '66px', width: '105px', marginLeft: '-85px', marginTop: '-23px'}}/>
+    <div className='w-full flex justify-between items-center p-4 sm:px-10 lg:px-24 absolute top-0'>
+      <img src={assets.pralaya_netra} alt="Pralaya Netra" className='w-28 sm:w-32 object-contain cursor-pointer' onClick={() => navigate("/")} />
       {userData ? 
       <div className='w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group hover:cursor-pointer'>
         {userData.name[0].toUpperCase()}
