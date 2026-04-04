@@ -26,6 +26,7 @@ app.use(cors(
 
 // API Endpoints
 app.get('/', (req, res) => res.send('Server is running'));  
+app.get('/api/ping', (req, res) => res.status(200).json({ success: true, message: 'Pong!' }));
   
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);

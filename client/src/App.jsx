@@ -1,25 +1,36 @@
-import React from 'react'
-import './index.css'
+import React, { Suspense, lazy } from 'react';
+import './index.css';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import EmailVerify from './pages/EmailVerify';
-import ResetPassword from './pages/ResetPassword';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Lazy load pages to reduce initial bundle size
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const EmailVerify = lazy(() => import('./pages/EmailVerify'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+
+// Loading text fallback for Suspense
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen text-white bg-slate-900">
+    Fetching Page...
+  </div>
+);
 
 const App = () => {
   return (
     <div className='main-content-container'>
-      <ToastContainer/>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/email-verify' element={<EmailVerify/>}/>
-        <Route path='/reset-password' element={<ResetPassword/>}/>
-      </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/email-verify' element={<EmailVerify/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>}/>
+        </Routes>
+      </Suspense>
     </div>
   )
 }
 
-export default App
+export default App;
