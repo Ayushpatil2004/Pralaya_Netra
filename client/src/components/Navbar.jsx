@@ -52,6 +52,9 @@ const Navbar = () => {
             {!userData.isAccountVerified &&
             <li onClick={sendVerificationOtp} className='py-2 px-4 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer border-b border-gray-100'>Verify Email</li>
             }
+            {userData.role === 'admin' &&
+            <li onClick={() => navigate('/admin')} className='py-2 px-4 hover:bg-slate-700 hover:text-white transition-colors cursor-pointer border-b border-gray-100 font-semibold'>Admin Panel</li>
+            }
             <li onClick={logout} className='py-2 px-4 hover:bg-red-50 hover:text-red-600 transition-colors cursor-pointer'>Logout</li>
           </ul>
         </div>

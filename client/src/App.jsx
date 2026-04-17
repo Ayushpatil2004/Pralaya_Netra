@@ -9,6 +9,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
 const EmailVerify = lazy(() => import('./pages/EmailVerify'));
 const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 // Loading text fallback for Suspense
 const LoadingFallback = () => (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/login' element={<Login/>}/>
           <Route path='/email-verify' element={<EmailVerify/>}/>
           <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route path='/admin' element={<AdminDashboard/>}/>
         </Routes>
       </Suspense>
     </div>

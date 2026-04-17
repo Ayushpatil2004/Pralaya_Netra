@@ -9,8 +9,11 @@ const userSchema = new mongoose.Schema({
     isAccountVerified: {type: Boolean, default: false},
     resetOtp: {type: String, default: ''},
     resetOtpExpireAt: {type: Number, default: 0},
+    role: {type: String, enum: ['user', 'admin'], default: 'user'},
+    isAdminApproved: {type: Boolean, default: false},
+    createdAt: {type: Date, default: Date.now}
 });
 
 const userModel = mongoose.models.user || mongoose.model('user', userSchema);
 
-export default userModel;   
+export default userModel;

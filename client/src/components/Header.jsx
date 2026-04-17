@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const { userData } = useContext(AppContext)
@@ -24,8 +25,10 @@ const Header = () => {
       </h2>
       <p className="mb-8 max-w-md text-white">Let's quickly see the analysis</p>
       <button onClick={()=>{
-        if (userData && userData.isAccountVerified) {
+        if (userData && userData.isAccountVerified && userData.isAdminApproved) {
           window.location.href = "https://app.powerbi.com/reportEmbed?reportId=a4e8a805-1b6a-4292-9ab9-d740a19a73cb&autoAuth=true&ctid=aa74b0a8-dc31-4e56-b78a-68531b73a97b";
+        } else if (userData && userData.isAccountVerified && !userData.isAdminApproved) {
+          toast.info("Verification Pending: Please wait until the Admin approves your account.");
         } else {
           navigate('/login')
         }

@@ -71,7 +71,12 @@ function EmailVerify() {
         
         // Direct Redirection 1: Successful verification attempt 
         setTimeout(() => {
-            window.location.href = POWER_BI_LINK; 
+            if (userData && userData.isAdminApproved) {
+                window.location.href = POWER_BI_LINK; 
+            } else {
+                toast.info("Pending Admin Approval. You will be able to access the dashboard soon.");
+                navigate('/');
+            }
         }, 700);
         
       }else{
@@ -91,13 +96,17 @@ function EmailVerify() {
         return;
     }
     
-    // If user IS logged in AND verified, redirect to Power BI
+    // If user IS logged in AND verified, redirect to Power BI IF approved
     if (!verificationSuccess && isLoggedin && userData && userData.isAccountVerified) {
-       toast.success("Account already verified! Redirecting to Power BI...");
-       // Direct Redirection 2: Already verified user visiting this page
-       setTimeout(() => {
-           window.location.href = POWER_BI_LINK; 
-       }, 700);
+       if (userData.isAdminApproved) {
+           toast.success("Account already verified! Redirecting to Power BI...");
+           setTimeout(() => {
+               window.location.href = POWER_BI_LINK; 
+           }, 700);
+       } else {
+           toast.info("Verification Pending: Admin must approve your account.");
+           navigate('/');
+       }
     }
         
   },[isLoggedin, userData, navigate, verificationSuccess]) 

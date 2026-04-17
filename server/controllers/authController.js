@@ -43,6 +43,7 @@ export const register = async (req, res) => {
             success: true, 
             message: 'Registration successful!',
             isAccountVerified: user.isAccountVerified,
+            isAdminApproved: user.isAdminApproved,
             token // Sending token to the client
         }); 
     } catch (error) {
@@ -77,6 +78,7 @@ export const login = async (req, res) => {
             success: true, 
             message: 'Logged in!',
             isAccountVerified: user.isAccountVerified,
+            isAdminApproved: user.isAdminApproved,
             token // Sending token to the client
         });
 

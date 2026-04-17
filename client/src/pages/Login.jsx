@@ -40,9 +40,8 @@ const Login = () => {
           setIsLoggedin(true)
           getUserData()
 
-          // 1. Logic for Verified Users (Redirect to Power BI)
-          if(data.isAccountVerified){
-             // Use specific success message based on state (Login or Sign Up)
+          // 1. Logic for Authenticated Users (Redirect completely only if fully approved)
+          if(data.isAccountVerified && data.isAdminApproved){
              const successMsg = state === "Sign Up" 
                 ? "Registration successful! Redirecting to Power BI..."
                 : "Login successful! Redirecting to Power BI...";
@@ -53,16 +52,20 @@ const Login = () => {
              }, 700);
           } 
           
-          // 2. Logic for Unverified Users (Redirect to Home for verification prompt)
+          // 2. Logic for Email Verified but Pending Admin Approval
+          else if(data.isAccountVerified && !data.isAdminApproved){
+             toast.info("Verification Pending: Please wait until the Admin approves your account.");
+             navigate('/');
+          }
+          
+          // 3. Logic for Unverified Users (Redirect to Home for OTP prompt)
           else {
-             // Use specific warning/success message based on state.
              const unverifiedMsg = state === "Sign Up" 
-               ? "Registration successful! Please verify your email to access Power BI."
-               : "Login successful! Please verify your email to access Power BI.";
+               ? "Registration successful! Please verify your email."
+               : "Login successful! Please verify your email.";
                
-             // Use toast.warn for verification prompt
              toast.warn(unverifiedMsg); 
-             navigate('/'); // Redirect to Home Page
+             navigate('/'); 
           }
         }else{
           toast.error(data.message)
