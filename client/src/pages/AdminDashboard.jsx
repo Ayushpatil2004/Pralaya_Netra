@@ -151,7 +151,7 @@ const AdminDashboard = () => {
                     {/* View: Dashboard Stats */}
                     {activeTab === 'dashboard' && (
                         <div className="space-y-6 animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">Global Statistics</h2>
+                            <h2 className="text-2xl font-semibold mb-6 text-blue-500">Global Statistics</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
                                     <h3 className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
                     {/* View: Broadcast Email */}
                     {activeTab === 'broadcast' && (
                         <div className="animate-fade-in w-full max-w-3xl">
-                            <h2 className="text-2xl font-semibold mb-6">Mass Communications</h2>
+                            <h2 className="text-2xl font-semibold mb-6 text-blue-500">Mass Communications</h2>
                             <div className="bg-slate-800/80 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
                                 <p className="text-slate-400 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
                                 <form onSubmit={handleBroadcast} className="flex flex-col gap-5">
@@ -216,7 +216,7 @@ const AdminDashboard = () => {
                     {/* View: User Management */}
                     {activeTab === 'users' && (
                         <div className="animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">User Database & Access Control</h2>
+                            <h2 className="text-2xl font-semibold mb-6 text-blue-500">User Database & Access Control</h2>
                             <div className="bg-slate-800/80 backdrop-blur rounded-xl shadow border border-slate-700/50 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse">
@@ -244,7 +244,7 @@ const AdminDashboard = () => {
                                                             ? <span className="bg-slate-900 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">Approved</span> 
                                                             : <span className="bg-yellow-900/20 text-yellow-500 border border-yellow-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm animate-pulse">Pending...</span>}
                                                     </td>
-                                                    <td className="p-5 text-right flex justify-end gap-3 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <td className="p-5 text-right flex justify-end gap-3">
                                                         {!user.isAdminApproved && user.isAccountVerified && (
                                                             <button 
                                                                 onClick={() => handleApprove(user._id)} 
