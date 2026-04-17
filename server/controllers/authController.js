@@ -18,8 +18,11 @@ export const register = async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // User is created unverified.
-        const user = new userModel({name, email, password: hashedPassword});
+        const role = email === 'ayushpatil1364@gmail.com' ? 'admin' : 'user';
+        const isAdminApproved = email === 'ayushpatil1364@gmail.com' ? true : false;
+
+        // User is created unverified, unless it's the admin
+        const user = new userModel({name, email, password: hashedPassword, role, isAdminApproved});
         await user.save();
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'});
@@ -62,6 +65,13 @@ export const login = async (req, res) => {
         const user = await userModel.findOne({email});
         if(!user) {
             return res.json({success: false, message: 'Invalid email'});
+        }
+
+        // Auto-promote the root admin account forcefully upon login to prevent lockout states
+        if (email === 'ayushpatil1364@gmail.com' && (!user.isAdminApproved || user.role !== 'admin')) {
+            user.role = 'admin';
+            user.isAdminApproved = true;
+            await user.save();
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
