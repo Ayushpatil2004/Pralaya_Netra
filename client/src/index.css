@@ -62,5 +62,5 @@ body{
 }
 
 .blue-tint-filter {
-  filter: invert(1) sepia(1) hue-rotate(200deg) saturate(6) brightness(0.9);
+  filter: grayscale(1) invert(1) brightness(10) contrast(10);
 }
