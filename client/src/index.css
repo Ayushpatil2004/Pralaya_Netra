@@ -61,6 +61,6 @@ body{
   animation: fadeIn 0.4s ease-out forwards;
 }
 
-.blue-tint-filter {
-  filter: grayscale(1) invert(1) brightness(10) contrast(10);
+.light-blue-tint-filter {
+  filter: hue-rotate(100deg) saturate(3) brightness(0.95);
 }
