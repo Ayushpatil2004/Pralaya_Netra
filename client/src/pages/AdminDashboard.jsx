@@ -107,13 +107,10 @@ const AdminDashboard = () => {
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row relative">
             {/* Animated Background */}
-            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-20 mix-blend-screen bg-[#1a1a2e]">
-                <img 
-                    src={assets.Animatedbg} 
-                    alt="Animated Background" 
-                    className="absolute w-[200vw] h-[200vh] object-cover -left-[50vw] -top-[50vh] animate-floating-bg blue-tint-filter"
-                />
-            </div>
+            <div 
+                className="fixed inset-0 z-0 pointer-events-none opacity-20 mix-blend-screen bg-[#1a1a2e] animate-floating-bg blue-tint-filter"
+                style={{ backgroundImage: `url(${assets.Animatedbg})`, backgroundRepeat: 'no-repeat' }}
+            ></div>
 
             {/* Sidebar */}
             <div className="w-full md:w-64 bg-slate-900/80 backdrop-blur-md border-b md:border-r border-slate-700/50 flex flex-col pt-6 z-10 shrink-0 shadow-lg">
