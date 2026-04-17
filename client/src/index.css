@@ -62,5 +62,5 @@ body{
 }
 
 .blue-tint-filter {
-  filter: hue-rotate(180deg) brightness(1.2) sepia(1) hue-rotate(180deg) saturate(3);
+  filter: invert(1) sepia(1) hue-rotate(200deg) saturate(6) brightness(0.9);
 }
