@@ -107,7 +107,7 @@ const AdminDashboard = () => {
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row relative">
             {/* Animated Background */}
-            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-10">
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-100">
                 <div 
                     className="absolute inset-0 w-full h-full animate-floating-bg"
                     style={{ backgroundImage: `url(${assets.Animatedbg})`, backgroundRepeat: 'no-repeat' }}
