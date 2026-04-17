@@ -98,24 +98,24 @@ const AdminDashboard = () => {
 
     const navItemClass = (tab) => `
         w-full text-left px-6 py-4 transition-colors text-sm uppercase tracking-wide cursor-pointer font-semibold
-        ${activeTab === tab ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800 border-l-4 border-transparent'}
+        ${activeTab === tab ? 'bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200 border-l-4 border-transparent'}
     `;
 
     // Filter out users who have the role "admin"
     const filteredUsers = users.filter(user => user.role !== 'admin');
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row relative">
+        <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row relative">
             {/* Animated Background */}
-            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none mix-blend-screen opacity-40">
                 <div 
-                    className="absolute inset-0 w-full h-full animate-floating-bg light-blue-tint-filter"
+                    className="absolute inset-0 w-full h-full animate-floating-bg blue-tint-filter"
                     style={{ backgroundImage: `url(${assets.Animatedbg})`, backgroundRepeat: 'no-repeat' }}
                 ></div>
             </div>
 
             {/* Sidebar */}
-            <div className="w-full md:w-64 bg-white/80 backdrop-blur-md border-b md:border-r border-slate-200 flex flex-col pt-6 z-10 shrink-0 shadow-lg">
+            <div className="w-full md:w-64 bg-slate-900/80 backdrop-blur-md border-b md:border-r border-slate-700/50 flex flex-col pt-6 z-10 shrink-0 shadow-lg">
                 <div className="px-6 mb-8 flex flex-col items-center md:items-start gap-2">
                     <img 
                         onClick={() => navigate("/")}
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
                         alt="Pralaya Netra" 
                         className="w-20 cursor-pointer object-contain" 
                     />
-                    <h2 className="text-2xl font-bold text-slate-800 hidden md:block">Admin <span className="text-blue-600">Portal</span></h2>
+                    <h2 className="text-2xl font-bold text-white hidden md:block">Admin <span className="text-indigo-400">Portal</span></h2>
                 </div>
                 
                 <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-hidden">
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
                         Broadcast Mail
                     </button>
                     <div className="mt-auto hidden md:block">
-                        <button onClick={() => navigate("/")} className="w-full text-left px-6 py-6 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer border-t border-slate-200 font-medium">
+                        <button onClick={() => navigate("/")} className="w-full text-left px-6 py-6 text-slate-400 hover:text-white transition-colors cursor-pointer border-t border-slate-800 font-medium">
                             ← Return to App
                         </button>
                     </div>
@@ -145,25 +145,25 @@ const AdminDashboard = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 p-4 md:p-10 text-slate-800 z-10 overflow-y-auto max-h-screen">
+            <div className="flex-1 p-4 md:p-10 text-white z-10 overflow-y-auto max-h-screen">
                 <div className="max-w-6xl mx-auto space-y-8">
                 
                     {/* View: Dashboard Stats */}
                     {activeTab === 'dashboard' && (
                         <div className="space-y-6 animate-fade-in">
-                            <h2 className="text-2xl font-bold text-blue-600 mb-6">Global Statistics</h2>
+                            <h2 className="text-2xl font-semibold mb-6">Global Statistics</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                                <div className="bg-white/90 backdrop-blur border border-slate-200 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
-                                    <p className="text-5xl font-black text-slate-800">{stats.totalUsers}</p>
+                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
+                                    <h3 className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
+                                    <p className="text-5xl font-black text-white">{stats.totalUsers}</p>
                                 </div>
-                                <div className="bg-white/90 backdrop-blur border border-slate-200 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Pending Map Approvals</h3>
-                                    <p className="text-5xl font-black text-blue-600">{stats.pendingApproval}</p>
+                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
+                                    <h3 className="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">Pending Map Approvals</h3>
+                                    <p className="text-5xl font-black text-yellow-300">{stats.pendingApproval}</p>
                                 </div>
-                                <div className="bg-white/90 backdrop-blur border border-slate-200 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Daily Signups</h3>
-                                    <p className="text-5xl font-black text-green-600">{stats.usersToday}</p>
+                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
+                                    <h3 className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">Daily Signups</h3>
+                                    <p className="text-5xl font-black text-green-300">{stats.usersToday}</p>
                                 </div>
                             </div>
                         </div>
@@ -172,9 +172,9 @@ const AdminDashboard = () => {
                     {/* View: Broadcast Email */}
                     {activeTab === 'broadcast' && (
                         <div className="animate-fade-in w-full max-w-3xl">
-                            <h2 className="text-2xl font-bold text-blue-600 mb-6">Mass Communications</h2>
-                            <div className="bg-white/90 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
-                                <p className="text-slate-500 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
+                            <h2 className="text-2xl font-semibold mb-6">Mass Communications</h2>
+                            <div className="bg-slate-800/80 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
+                                <p className="text-slate-400 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
                                 <form onSubmit={handleBroadcast} className="flex flex-col gap-5">
                                     <input 
                                         type="text" 
@@ -182,7 +182,7 @@ const AdminDashboard = () => {
                                         required 
                                         value={subject}
                                         onChange={(e) => setSubject(e.target.value)}
-                                        className="p-4 bg-slate-50 rounded outline-none border border-slate-300 focus:border-blue-500 transition-colors placeholder:text-slate-400 text-slate-800"
+                                        className="p-4 bg-slate-900/90 rounded outline-none border border-slate-700 focus:border-indigo-500 transition-colors placeholder:text-slate-500"
                                     />
                                     <textarea 
                                         rows="6" 
@@ -190,7 +190,7 @@ const AdminDashboard = () => {
                                         required
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className="p-4 bg-slate-50 rounded outline-none border border-slate-300 focus:border-blue-500 transition-colors placeholder:text-slate-400 text-slate-800 resize-none"
+                                        className="p-4 bg-slate-900/90 rounded outline-none border border-slate-700 focus:border-indigo-500 transition-colors placeholder:text-slate-500 resize-none"
                                     ></textarea>
                                     
                                     <label className="flex items-center gap-3 mt-2 cursor-pointer w-max">
@@ -198,14 +198,14 @@ const AdminDashboard = () => {
                                             type="checkbox" 
                                             checked={sendToUnverified} 
                                             onChange={(e) => setSendToUnverified(e.target.checked)} 
-                                            className="w-5 h-5 rounded border-slate-300 cursor-pointer accent-blue-600"
+                                            className="w-5 h-5 rounded border-slate-600 cursor-pointer accent-indigo-600"
                                         />
-                                        <span className="text-sm text-slate-600 select-none">
+                                        <span className="text-sm text-slate-300 select-none">
                                             Send ONLY to strictly Unverified Users (for engagement reminders)
                                         </span>
                                     </label>
 
-                                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 mt-4 rounded-lg shadow-md transition-colors w-full cursor-pointer">
+                                    <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 mt-4 rounded-lg shadow-md transition-colors w-full cursor-pointer">
                                         Deploy Global Broadcast
                                     </button>
                                 </form>
@@ -216,46 +216,46 @@ const AdminDashboard = () => {
                     {/* View: User Management */}
                     {activeTab === 'users' && (
                         <div className="animate-fade-in">
-                            <h2 className="text-2xl font-bold text-blue-600 mb-6">User Database & Access Control</h2>
-                            <div className="bg-white/90 backdrop-blur rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                            <h2 className="text-2xl font-semibold mb-6">User Database & Access Control</h2>
+                            <div className="bg-slate-800/80 backdrop-blur rounded-xl shadow border border-slate-700/50 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse">
                                         <thead>
-                                            <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
-                                                <th className="p-5 font-bold whitespace-nowrap hidden sm:table-cell">Name</th>
-                                                <th className="p-5 font-bold whitespace-nowrap">Email Address</th>
-                                                <th className="p-5 font-bold whitespace-nowrap text-center">Verified?</th>
-                                                <th className="p-5 font-bold whitespace-nowrap text-center">Map Access</th>
-                                                <th className="p-5 font-bold whitespace-nowrap text-right">Actions</th>
+                                            <tr className="bg-slate-900/50 text-slate-400 text-xs uppercase tracking-wider">
+                                                <th className="p-5 font-semibold whitespace-nowrap hidden sm:table-cell">Name</th>
+                                                <th className="p-5 font-semibold whitespace-nowrap">Email Address</th>
+                                                <th className="p-5 font-semibold whitespace-nowrap text-center">Verified?</th>
+                                                <th className="p-5 font-semibold whitespace-nowrap text-center">Map Access</th>
+                                                <th className="p-5 font-semibold whitespace-nowrap text-right">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="divide-y divide-slate-200">
+                                        <tbody className="divide-y divide-slate-700/50">
                                             {filteredUsers.map((user) => (
-                                                <tr key={user._id} className="hover:bg-slate-50/80 transition-colors group">
+                                                <tr key={user._id} className="hover:bg-slate-700/30 transition-colors group">
                                                     <td className="p-5 capitalize font-medium hidden sm:table-cell">{user.name}</td>
-                                                    <td className="p-5 text-slate-600">{user.email}</td>
+                                                    <td className="p-5 text-slate-300">{user.email}</td>
                                                     <td className="p-5 text-center">
                                                         {user.isAccountVerified 
-                                                            ? <span className="bg-green-100 text-green-700 border border-green-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm">True</span> 
-                                                            : <span className="bg-red-100 text-red-700 border border-red-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm">False</span>}
+                                                            ? <span className="bg-slate-900 text-green-400 border border-green-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">True</span> 
+                                                            : <span className="bg-slate-900 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">False</span>}
                                                     </td>
                                                     <td className="p-5 text-center">
                                                         {user.isAdminApproved 
-                                                            ? <span className="bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm">Approved</span> 
-                                                            : <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm animate-pulse">Pending...</span>}
+                                                            ? <span className="bg-slate-900 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">Approved</span> 
+                                                            : <span className="bg-yellow-900/20 text-yellow-500 border border-yellow-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm animate-pulse">Pending...</span>}
                                                     </td>
-                                                    <td className="p-5 text-right flex justify-end gap-3">
+                                                    <td className="p-5 text-right flex justify-end gap-3 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                         {!user.isAdminApproved && user.isAccountVerified && (
                                                             <button 
                                                                 onClick={() => handleApprove(user._id)} 
-                                                                className="bg-green-600 hover:bg-green-700 text-white font-semibold text-xs py-1.5 px-4 rounded transition-colors shadow cursor-pointer focus:ring-2 ring-green-400 focus:outline-none"
+                                                                className="bg-green-600/90 hover:bg-green-500 text-white font-semibold text-xs py-1.5 px-4 rounded transition-colors shadow cursor-pointer focus:ring-2 ring-green-400 focus:outline-none"
                                                             >
                                                                 Approve
                                                             </button>
                                                         )}
                                                         <button 
                                                             onClick={() => handleDelete(user._id)} 
-                                                            className="bg-red-100 hover:bg-red-600 text-red-700 hover:text-white font-semibold text-xs py-1.5 px-4 rounded transition-all shadow cursor-pointer focus:ring-2 ring-red-400 focus:outline-none"
+                                                            className="bg-red-900/80 hover:bg-red-600 text-red-200 hover:text-white font-semibold text-xs py-1.5 px-4 rounded transition-all shadow cursor-pointer focus:ring-2 ring-red-400 focus:outline-none"
                                                         >
                                                             Revoke User
                                                         </button>
@@ -264,7 +264,7 @@ const AdminDashboard = () => {
                                             ))}
                                             {filteredUsers.length === 0 && (
                                                 <tr>
-                                                    <td colSpan="5" className="p-12 text-center text-slate-400 italic">No standard users actively registered in the database.</td>
+                                                    <td colSpan="5" className="p-12 text-center text-slate-500 italic">No standard users actively registered in the database.</td>
                                                 </tr>
                                             )}
                                         </tbody>
