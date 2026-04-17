@@ -151,18 +151,18 @@ const AdminDashboard = () => {
                     {/* View: Dashboard Stats */}
                     {activeTab === 'dashboard' && (
                         <div className="space-y-6 animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">Global Statistics</h2>
+                            <h2 className="text-2xl font-black mb-6 text-blue-900 bg-white/80 inline-block px-4 py-2 rounded shadow-lg backdrop-blur-sm">Global Statistics</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
+                                    <h3 className="text-blue-300 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
                                     <p className="text-5xl font-black text-white">{stats.totalUsers}</p>
                                 </div>
                                 <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-2">Pending Map Approvals</h3>
+                                    <h3 className="text-blue-300 text-xs font-bold uppercase tracking-wider mb-2">Pending Map Approvals</h3>
                                     <p className="text-5xl font-black text-yellow-300">{stats.pendingApproval}</p>
                                 </div>
                                 <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-white text-xs font-bold uppercase tracking-wider mb-2">Daily Signups</h3>
+                                    <h3 className="text-blue-300 text-xs font-bold uppercase tracking-wider mb-2">Daily Signups</h3>
                                     <p className="text-5xl font-black text-green-300">{stats.usersToday}</p>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
                     {/* View: Broadcast Email */}
                     {activeTab === 'broadcast' && (
                         <div className="animate-fade-in w-full max-w-3xl">
-                            <h2 className="text-2xl font-semibold mb-6">Mass Communications</h2>
+                            <h2 className="text-2xl font-black mb-6 text-blue-900 bg-white/80 inline-block px-4 py-2 rounded shadow-lg backdrop-blur-sm">Mass Communications</h2>
                             <div className="bg-slate-800/80 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
                                 <p className="text-slate-400 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
                                 <form onSubmit={handleBroadcast} className="flex flex-col gap-5">
@@ -216,7 +216,7 @@ const AdminDashboard = () => {
                     {/* View: User Management */}
                     {activeTab === 'users' && (
                         <div className="animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">User Database & Access Control</h2>
+                            <h2 className="text-2xl font-black mb-6 text-blue-900 bg-white/80 inline-block px-4 py-2 rounded shadow-lg backdrop-blur-sm">User Database & Access Control</h2>
                             <div className="bg-slate-800/80 backdrop-blur rounded-xl shadow border border-slate-700/50 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse">
