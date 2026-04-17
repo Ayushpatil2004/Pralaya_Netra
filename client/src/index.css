@@ -39,3 +39,33 @@ body{
     background-color: rgba(0, 0, 0, 0.7); 
     z-index: -1; 
 }
+
+/* Animations for Admin Panel Background */
+@keyframes floatYBg {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-5%) scale(1.05); opacity: 0.5; }
+  100% { transform: translateY(0) scale(1); opacity: 0.8; }
+}
+
+@keyframes floatXBg {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(5%) rotate(5deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-floating-bg {
+  animation: floatYBg 15s infinite ease-in-out, floatXBg 20s infinite ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.blue-tint-filter {
+  filter: hue-rotate(180deg) brightness(1.2) sepia(1) hue-rotate(180deg) saturate(3);
+}

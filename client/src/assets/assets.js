@@ -10,6 +10,7 @@ import disaster_bg from './disaster_bg.jpg'
 import disaster2_bg from './disaster2_bg.jpg'
 import disaster3_bg from './disaster3_bg.png'
 import disaster4_bg from './disaster4_bg.jpg'
+import Animatedbg from './Animatedbg.png'
 
 export const assets = {
     arrow_icon,
@@ -23,5 +24,6 @@ export const assets = {
     disaster_bg,
     disaster2_bg,
     disaster3_bg,
-    disaster4_bg
+    disaster4_bg,
+    Animatedbg
 }
