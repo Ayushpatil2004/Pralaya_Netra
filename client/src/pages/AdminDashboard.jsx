@@ -107,24 +107,24 @@ const AdminDashboard = () => {
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row relative">
             {/* Animated Background */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20 Mix-blend-screen">
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-20 mix-blend-screen bg-[#1a1a2e]">
                 <img 
                     src={assets.Animatedbg} 
                     alt="Animated Background" 
-                    className="absolute w-[150%] h-[150%] object-cover -left-[25%] -top-[25%] animate-floating-bg blue-tint-filter"
+                    className="absolute w-[200vw] h-[200vh] object-cover -left-[50vw] -top-[50vh] animate-floating-bg blue-tint-filter"
                 />
             </div>
 
             {/* Sidebar */}
             <div className="w-full md:w-64 bg-slate-900/80 backdrop-blur-md border-b md:border-r border-slate-700/50 flex flex-col pt-6 z-10 shrink-0 shadow-lg">
-                <div className="px-6 mb-8 flex items-center justify-center md:justify-start gap-4">
+                <div className="px-6 mb-8 flex flex-col items-center md:items-start gap-2">
                     <img 
                         onClick={() => navigate("/")}
                         src={assets.pralaya_netra} 
                         alt="Pralaya Netra" 
-                        className="w-16 cursor-pointer object-contain" 
+                        className="w-20 cursor-pointer object-contain" 
                     />
-                    <h2 className="text-xl font-bold text-white hidden md:block">Admin<br/><span className="text-indigo-400">Portal</span></h2>
+                    <h2 className="text-2xl font-bold text-white hidden md:block">Admin <span className="text-indigo-400">Portal</span></h2>
                 </div>
                 
                 <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-hidden">
