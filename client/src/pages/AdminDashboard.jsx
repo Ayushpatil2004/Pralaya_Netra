@@ -98,16 +98,16 @@ const AdminDashboard = () => {
 
     const navItemClass = (tab) => `
         w-full text-left px-6 py-4 transition-colors text-sm uppercase tracking-wide cursor-pointer font-semibold
-        ${activeTab === tab ? 'bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200 border-l-4 border-transparent'}
+        ${activeTab === tab ? 'bg-cyan-900/30 text-cyan-400 border-l-4 border-cyan-400' : 'text-blue-300 hover:bg-blue-900/50 hover:text-white border-l-4 border-transparent'}
     `;
 
     // Filter out users who have the role "admin"
     const filteredUsers = users.filter(user => user.role !== 'admin');
 
     return (
-        <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row relative">
+        <div className="min-h-screen bg-blue-950 flex flex-col md:flex-row relative">
             {/* Animated Background */}
-            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none mix-blend-screen opacity-40">
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none mix-blend-screen opacity-50">
                 <div 
                     className="absolute inset-0 w-full h-full animate-floating-bg blue-tint-filter"
                     style={{ backgroundImage: `url(${assets.Animatedbg})`, backgroundRepeat: 'no-repeat' }}
@@ -115,18 +115,18 @@ const AdminDashboard = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="w-full md:w-64 bg-slate-900/80 backdrop-blur-md border-b md:border-r border-slate-700/50 flex flex-col pt-6 z-10 shrink-0 shadow-lg">
-                <div className="px-6 mb-8 flex flex-col items-center md:items-start gap-2">
+            <div className="w-full md:w-64 bg-blue-950/80 backdrop-blur-md border-b md:border-r border-blue-800/60 flex flex-col pt-6 z-10 shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+                <div className="px-6 mb-8 flex flex-col items-center md:items-start gap-3">
                     <img 
                         onClick={() => navigate("/")}
                         src={assets.pralaya_netra} 
                         alt="Pralaya Netra" 
-                        className="w-20 cursor-pointer object-contain" 
+                        className="w-20 cursor-pointer object-contain filter drop-shadow-md" 
                     />
-                    <h2 className="text-2xl font-bold text-white hidden md:block">Admin <span className="text-indigo-400">Portal</span></h2>
+                    <h2 className="text-2xl font-bold text-white hidden md:block">Admin <span className="text-cyan-400">Portal</span></h2>
                 </div>
                 
-                <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-hidden">
+                <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-hidden mt-2">
                     <button onClick={() => setActiveTab('dashboard')} className={navItemClass('dashboard')}>
                         Global Stats
                     </button>
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
                         Broadcast Mail
                     </button>
                     <div className="mt-auto hidden md:block">
-                        <button onClick={() => navigate("/")} className="w-full text-left px-6 py-6 text-slate-400 hover:text-white transition-colors cursor-pointer border-t border-slate-800 font-medium">
+                        <button onClick={() => navigate("/")} className="w-full text-left px-6 py-6 text-blue-300 hover:text-white hover:bg-blue-900/50 transition-colors cursor-pointer border-t border-blue-800/60 font-medium">
                             ← Return to App
                         </button>
                     </div>
@@ -151,19 +151,21 @@ const AdminDashboard = () => {
                     {/* View: Dashboard Stats */}
                     {activeTab === 'dashboard' && (
                         <div className="space-y-6 animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">Global Statistics</h2>
+                            <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"><span className="w-2 h-6 bg-cyan-400 rounded-sm"></span> Global Statistics</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
-                                    <p className="text-5xl font-black text-white">{stats.totalUsers}</p>
+                                <div className="bg-blue-900/60 backdrop-blur border border-blue-800/60 p-6 rounded-xl shadow-lg ring-1 ring-white/5">
+                                    <h3 className="text-blue-300 text-xs font-bold uppercase tracking-wider mb-2">Total Registered Users</h3>
+                                    <p className="text-5xl font-black text-white drop-shadow">{stats.totalUsers}</p>
                                 </div>
-                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">Pending Map Approvals</h3>
-                                    <p className="text-5xl font-black text-yellow-300">{stats.pendingApproval}</p>
+                                <div className="bg-blue-900/60 backdrop-blur border border-yellow-500/30 p-6 rounded-xl shadow-lg ring-1 ring-white/5 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl -mr-10 -mt-10"></div>
+                                    <h3 className="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Pending Map Approvals</h3>
+                                    <p className="text-5xl font-black text-yellow-300 drop-shadow relative z-10">{stats.pendingApproval}</p>
                                 </div>
-                                <div className="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-xl shadow-lg">
-                                    <h3 className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">Daily Signups</h3>
-                                    <p className="text-5xl font-black text-green-300">{stats.usersToday}</p>
+                                <div className="bg-blue-900/60 backdrop-blur border border-emerald-500/30 p-6 rounded-xl shadow-lg ring-1 ring-white/5 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl -mr-10 -mt-10"></div>
+                                    <h3 className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Daily Signups</h3>
+                                    <p className="text-5xl font-black text-emerald-300 drop-shadow relative z-10">{stats.usersToday}</p>
                                 </div>
                             </div>
                         </div>
@@ -172,9 +174,9 @@ const AdminDashboard = () => {
                     {/* View: Broadcast Email */}
                     {activeTab === 'broadcast' && (
                         <div className="animate-fade-in w-full max-w-3xl">
-                            <h2 className="text-2xl font-semibold mb-6">Mass Communications</h2>
-                            <div className="bg-slate-800/80 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
-                                <p className="text-slate-400 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
+                            <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"><span className="w-2 h-6 bg-cyan-400 rounded-sm"></span> Mass Communications</h2>
+                            <div className="bg-blue-900/60 backdrop-blur p-6 md:p-8 rounded-xl shadow-lg border border-blue-800/60 ring-1 ring-white/5">
+                                <p className="text-blue-200 mb-6 text-sm">Send a notification email directly to the registered userbase via the integrated API.</p>
                                 <form onSubmit={handleBroadcast} className="flex flex-col gap-5">
                                     <input 
                                         type="text" 
@@ -182,7 +184,7 @@ const AdminDashboard = () => {
                                         required 
                                         value={subject}
                                         onChange={(e) => setSubject(e.target.value)}
-                                        className="p-4 bg-slate-900/90 rounded outline-none border border-slate-700 focus:border-indigo-500 transition-colors placeholder:text-slate-500"
+                                        className="p-4 bg-blue-950 rounded-lg outline-none border border-blue-700/50 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all placeholder:text-blue-400/50 shadow-inner"
                                     />
                                     <textarea 
                                         rows="6" 
@@ -190,22 +192,22 @@ const AdminDashboard = () => {
                                         required
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className="p-4 bg-slate-900/90 rounded outline-none border border-slate-700 focus:border-indigo-500 transition-colors placeholder:text-slate-500 resize-none"
+                                        className="p-4 bg-blue-950 rounded-lg outline-none border border-blue-700/50 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all placeholder:text-blue-400/50 resize-none shadow-inner"
                                     ></textarea>
                                     
-                                    <label className="flex items-center gap-3 mt-2 cursor-pointer w-max">
+                                    <label className="flex items-center gap-3 mt-2 cursor-pointer w-max group">
                                         <input 
                                             type="checkbox" 
                                             checked={sendToUnverified} 
                                             onChange={(e) => setSendToUnverified(e.target.checked)} 
-                                            className="w-5 h-5 rounded border-slate-600 cursor-pointer accent-indigo-600"
+                                            className="w-5 h-5 rounded border-blue-border-600 bg-blue-950 cursor-pointer accent-cyan-500"
                                         />
-                                        <span className="text-sm text-slate-300 select-none">
+                                        <span className="text-sm text-blue-200 select-none group-hover:text-white transition-colors">
                                             Send ONLY to strictly Unverified Users (for engagement reminders)
                                         </span>
                                     </label>
 
-                                    <button className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 mt-4 rounded-lg shadow-md transition-colors w-full cursor-pointer">
+                                    <button className="bg-blue-600 hover:bg-cyan-500 text-white font-bold py-4 mt-4 rounded-lg shadow-[0_0_15px_rgba(6,-182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,-182,212,0.5)] transition-all w-full cursor-pointer uppercase tracking-wideset border border-blue-500 hover:border-cyan-300">
                                         Deploy Global Broadcast
                                     </button>
                                 </form>
@@ -216,12 +218,12 @@ const AdminDashboard = () => {
                     {/* View: User Management */}
                     {activeTab === 'users' && (
                         <div className="animate-fade-in">
-                            <h2 className="text-2xl font-semibold mb-6">User Database & Access Control</h2>
-                            <div className="bg-slate-800/80 backdrop-blur rounded-xl shadow border border-slate-700/50 overflow-hidden">
+                            <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"><span className="w-2 h-6 bg-cyan-400 rounded-sm"></span> User Database & Access Control</h2>
+                            <div className="bg-blue-900/60 backdrop-blur rounded-xl shadow-lg border border-blue-800/60 ring-1 ring-white/5 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse">
                                         <thead>
-                                            <tr className="bg-slate-900/50 text-slate-400 text-xs uppercase tracking-wider">
+                                            <tr className="bg-blue-950 text-blue-300 text-xs uppercase tracking-wider border-b border-blue-800/60">
                                                 <th className="p-5 font-semibold whitespace-nowrap hidden sm:table-cell">Name</th>
                                                 <th className="p-5 font-semibold whitespace-nowrap">Email Address</th>
                                                 <th className="p-5 font-semibold whitespace-nowrap text-center">Verified?</th>
@@ -229,33 +231,33 @@ const AdminDashboard = () => {
                                                 <th className="p-5 font-semibold whitespace-nowrap text-right">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="divide-y divide-slate-700/50">
+                                        <tbody className="divide-y divide-blue-800/40">
                                             {filteredUsers.map((user) => (
-                                                <tr key={user._id} className="hover:bg-slate-700/30 transition-colors group">
-                                                    <td className="p-5 capitalize font-medium hidden sm:table-cell">{user.name}</td>
-                                                    <td className="p-5 text-slate-300">{user.email}</td>
+                                                <tr key={user._id} className="hover:bg-blue-800/40 transition-colors group">
+                                                    <td className="p-5 capitalize font-medium hidden sm:table-cell text-white">{user.name}</td>
+                                                    <td className="p-5 text-blue-200">{user.email}</td>
                                                     <td className="p-5 text-center">
                                                         {user.isAccountVerified 
-                                                            ? <span className="bg-slate-900 text-green-400 border border-green-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">True</span> 
-                                                            : <span className="bg-slate-900 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">False</span>}
+                                                            ? <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-block">True</span> 
+                                                            : <span className="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-block">False</span>}
                                                     </td>
                                                     <td className="p-5 text-center">
                                                         {user.isAdminApproved 
-                                                            ? <span className="bg-slate-900 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm">Approved</span> 
-                                                            : <span className="bg-yellow-900/20 text-yellow-500 border border-yellow-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm animate-pulse">Pending...</span>}
+                                                            ? <span className="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-bold shadow-[0_0_10px_rgba(34,211,238,0.2)] inline-block">Approved</span> 
+                                                            : <span className="bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-block animate-pulse">Pending...</span>}
                                                     </td>
                                                     <td className="p-5 text-right flex justify-end gap-3 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                         {!user.isAdminApproved && user.isAccountVerified && (
                                                             <button 
                                                                 onClick={() => handleApprove(user._id)} 
-                                                                className="bg-green-600/90 hover:bg-green-500 text-white font-semibold text-xs py-1.5 px-4 rounded transition-colors shadow cursor-pointer focus:ring-2 ring-green-400 focus:outline-none"
+                                                                className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-1.5 px-4 rounded transition-all shadow-md hover:shadow-lg cursor-pointer focus:ring-2 ring-emerald-400 focus:outline-none border border-emerald-500"
                                                             >
                                                                 Approve
                                                             </button>
                                                         )}
                                                         <button 
                                                             onClick={() => handleDelete(user._id)} 
-                                                            className="bg-red-900/80 hover:bg-red-600 text-red-200 hover:text-white font-semibold text-xs py-1.5 px-4 rounded transition-all shadow cursor-pointer focus:ring-2 ring-red-400 focus:outline-none"
+                                                            className="bg-red-950/80 hover:bg-red-600 text-red-300 hover:text-white font-semibold text-xs py-1.5 px-4 rounded transition-all shadow-md hover:shadow-lg cursor-pointer focus:ring-2 ring-red-400 focus:outline-none border border-red-800/50 hover:border-red-500"
                                                         >
                                                             Revoke User
                                                         </button>
@@ -264,7 +266,7 @@ const AdminDashboard = () => {
                                             ))}
                                             {filteredUsers.length === 0 && (
                                                 <tr>
-                                                    <td colSpan="5" className="p-12 text-center text-slate-500 italic">No standard users actively registered in the database.</td>
+                                                    <td colSpan="5" className="p-12 text-center text-blue-400/60 italic">No standard users actively registered in the database.</td>
                                                 </tr>
                                             )}
                                         </tbody>
