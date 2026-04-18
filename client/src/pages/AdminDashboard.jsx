@@ -148,7 +148,7 @@ const AdminDashboard = () => {
                     <div className="mt-auto hidden md:block p-6 border-t border-blue-800/60">
                         <button 
                             onClick={() => navigate("/")} 
-                            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-blue-900/40 hover:bg-cyan-500/10 text-blue-300 hover:text-cyan-300 transition-all border border-blue-800/50 hover:border-cyan-500/30 font-semibold group"
+                            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-blue-900/40 hover:bg-cyan-500/10 text-blue-300 hover:text-cyan-300 transition-all border border-blue-800/50 hover:border-cyan-500/30 font-semibold group cursor-pointer"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
