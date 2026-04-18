@@ -136,9 +136,15 @@ const AdminDashboard = () => {
                     <button onClick={() => setActiveTab('broadcast')} className={navItemClass('broadcast')}>
                         Broadcast Mail
                     </button>
-                    <div className="mt-auto hidden md:block">
-                        <button onClick={() => navigate("/")} className="w-full text-left px-6 py-6 text-blue-300 hover:text-white hover:bg-blue-900/50 transition-colors cursor-pointer border-t border-blue-800/60 font-medium">
-                            ← Return to App
+                    <div className="mt-auto hidden md:block p-6 border-t border-blue-800/60">
+                        <button 
+                            onClick={() => navigate("/")} 
+                            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-blue-900/40 hover:bg-cyan-500/10 text-blue-300 hover:text-cyan-300 transition-all border border-blue-800/50 hover:border-cyan-500/30 font-semibold group"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            Return to App
                         </button>
                     </div>
                 </nav>
