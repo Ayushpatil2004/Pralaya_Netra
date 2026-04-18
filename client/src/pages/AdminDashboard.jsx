@@ -116,14 +116,15 @@ const AdminDashboard = () => {
 
             {/* Sidebar */}
             <div className="w-full md:w-64 bg-blue-950/80 backdrop-blur-md border-b md:border-r border-blue-800/60 flex flex-col pt-6 z-10 shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
-                <div className="px-6 mb-8 flex flex-col items-center md:items-start gap-3">
-                    <img 
-                        onClick={() => navigate("/")}
-                        src={assets.pralaya_netra} 
-                        alt="Pralaya Netra" 
-                        className="w-20 cursor-pointer object-contain filter drop-shadow-md" 
-                    />
-                    <h2 className="text-2xl font-bold text-white hidden md:block">Admin <span className="text-cyan-400">Portal</span></h2>
+                <div className="px-6 mb-8 mt-2 flex flex-row items-center gap-3 cursor-pointer group" onClick={() => navigate("/")}>
+                    <div className="relative w-14 h-9 overflow-hidden shrink-0 flex items-start">
+                        <img 
+                            src={assets.pralaya_netra} 
+                            alt="Pralaya Netra" 
+                            className="w-14 h-auto object-contain filter drop-shadow-[0_0_8px_rgba(250,204,21,0.5)] group-hover:scale-110 transition-transform origin-top" 
+                        />
+                    </div>
+                    <h2 className="text-xl font-extrabold text-white hidden md:block tracking-wider uppercase">Admin<span className="text-cyan-400">Portal</span></h2>
                 </div>
                 
                 <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-hidden mt-2">
