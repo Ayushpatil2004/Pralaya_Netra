@@ -4,14 +4,17 @@ import transporter from '../config/nodemailer.js';
 // Get high-level statistics for the dashboard
 export const getAdminStats = async (req, res) => {
     try {
-        const totalUsers = await userModel.countDocuments();
-        const totalVerified = await userModel.countDocuments({ isAccountVerified: true });
-        const pendingApproval = await userModel.countDocuments({ isAccountVerified: true, isAdminApproved: false });
+        // Base query to exclude admins
+        const baseQuery = { role: { $ne: 'admin' } };
+
+        const totalUsers = await userModel.countDocuments(baseQuery);
+        const totalVerified = await userModel.countDocuments({ ...baseQuery, isAccountVerified: true });
+        const pendingApproval = await userModel.countDocuments({ ...baseQuery, isAccountVerified: true, isAdminApproved: false });
         
         // Count users created today
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
-        const usersToday = await userModel.countDocuments({ createdAt: { $gte: startOfDay } });
+        const usersToday = await userModel.countDocuments({ ...baseQuery, createdAt: { $gte: startOfDay } });
 
         res.json({
             success: true,

@@ -164,7 +164,7 @@ const AdminDashboard = () => {
                                 </div>
                                 <div className="bg-blue-900/60 backdrop-blur border border-emerald-500/30 p-6 rounded-xl shadow-lg ring-1 ring-white/5 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl -mr-10 -mt-10"></div>
-                                    <h3 className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Daily Signups</h3>
+                                    <h3 className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">New Accounts Today</h3>
                                     <p className="text-5xl font-black text-emerald-300 drop-shadow relative z-10">{stats.usersToday}</p>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@ const AdminDashboard = () => {
                                                             ? <span className="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-bold shadow-[0_0_10px_rgba(34,211,238,0.2)] inline-block">Approved</span> 
                                                             : <span className="bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-3 py-1 rounded-full text-xs font-bold shadow-sm inline-block animate-pulse">Pending...</span>}
                                                     </td>
-                                                    <td className="p-5 text-right flex justify-end gap-3 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <td className="p-5 text-right flex justify-end gap-3 opacity-100 transition-opacity">
                                                         {!user.isAdminApproved && user.isAccountVerified && (
                                                             <button 
                                                                 onClick={() => handleApprove(user._id)} 
