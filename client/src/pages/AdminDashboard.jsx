@@ -174,7 +174,7 @@ const AdminDashboard = () => {
                                 </div>
                                 <div className="bg-blue-900/60 backdrop-blur border border-yellow-500/30 p-6 rounded-xl shadow-lg ring-1 ring-white/5 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl -mr-10 -mt-10"></div>
-                                    <h3 className="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Pending Map Approvals</h3>
+                                    <h3 className="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2 relative z-10">Pending Dashboard Approvals</h3>
                                     <p className="text-5xl font-black text-yellow-300 drop-shadow relative z-10">{stats.pendingApproval}</p>
                                 </div>
                                 <div className="bg-blue-900/60 backdrop-blur border border-emerald-500/30 p-6 rounded-xl shadow-lg ring-1 ring-white/5 relative overflow-hidden">
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
                                                 <th className="p-5 font-semibold whitespace-nowrap hidden sm:table-cell">Name</th>
                                                 <th className="p-5 font-semibold whitespace-nowrap">Email Address</th>
                                                 <th className="p-5 font-semibold whitespace-nowrap text-center">Verified?</th>
-                                                <th className="p-5 font-semibold whitespace-nowrap text-center">Map Access</th>
+                                                <th className="p-5 font-semibold whitespace-nowrap text-center">Dashboard Access</th>
                                                 <th className="p-5 font-semibold whitespace-nowrap text-right">Actions</th>
                                             </tr>
                                         </thead>
